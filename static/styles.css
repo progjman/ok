@@ -1,4 +1,37 @@
 
+/* 🌞 Светлая тема — по умолчанию */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* 🌙 Тёмная тема — если включена в системе */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.input {
+    background-color: #1e1e1e;
+    color:  black;
+    border-color: #333;
+}
+
+.input.valid {
+    border-color: #4caf50;
+    background-color: #1a3d1a;
+    box-shadow: 0 0 4px 1px #4CAF50;
+}
+
+.input.invalid {
+    border-color: #f44336;
+    background-color: #3d1a1a;
+    box-shadow: 0 0 4px 1px #f44336;
+}
+}
+
+
 body {
   font-family: sans-serif;
   padding: 2rem;
