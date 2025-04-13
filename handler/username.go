@@ -15,12 +15,12 @@ func CheckUsername(w http.ResponseWriter, r *http.Request) {
 	username = strings.TrimSpace(username)
 
 	if len(username) < 3 || len(username) > 20 {
-		writeInvalid(w, username, "From 3 to 20 characters")
+		writeInvalid(w, username, "From 3 to 20 a - z  A - Z  0  -9  _")
 		return
 	}
 
 	if !isValidNickname(username) {
-		writeInvalid(w, username, "Only Latin letters, numbers and _")
+		writeInvalid(w, username, "Only Latin letters  a - z  A - Z  0  -9  _")
 		return
 	}
 

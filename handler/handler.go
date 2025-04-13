@@ -7,7 +7,7 @@ import (
 )
 
 func ShowRegisterPage(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "register.html", nil)
+	RenderTemplate(w, "username.html", nil)
 }
 
 func RenderTemplate(w http.ResponseWriter, tmpl string, data any) {

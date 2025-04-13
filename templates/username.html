@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+  <link rel="stylesheet" href="/static/styles.css">
+  
+
+</head>
+
+<body>
+  
+  <form id="register-form">
+    <div id="step-wrapper">
+      <label for="username">Your nickname</label>
+      <input type="text" name="username" id="username" class="input" hx-get="/check-username"
+        hx-trigger="keyup changed delay:300ms" hx-target="#step-wrapper" hx-swap="outerHTML" />
+      <div class="status-msg"></div>
+    </div>
+    <br>
+    <button 
+    hx-get="/register/password-step"
+    hx-target="#register-form"
+    hx-swap="innerHTML"
+    hx-include="#username"
+    type="button">Next</button>
+  </form>
+</body>
+
+</html>
