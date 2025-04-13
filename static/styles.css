@@ -1,0 +1,42 @@
+
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+}
+
+.input {
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input.valid {
+  border-color: green;
+  background-color: #e6ffe6;
+  box-shadow: 0 0 4px 1px #4CAF50;
+}
+
+.input.invalid {
+  border-color: red;
+  background-color: #ffe6e6;
+  box-shadow: 0 0 4px 1px #f44336;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.status-msg {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.status-msg.error {
+  color: red;
+}
+
+.status-msg.success {
+  color: green;
+}
