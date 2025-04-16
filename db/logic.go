@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func IsUsernameTaken(username string) bool {
+func СheckUsernameDB(username string) bool {
 	var exists bool
 	err := DB.QueryRow(context.Background(),
 		"SELECT EXISTS(SELECT 1 FROM users WHERE username=$1)", username).Scan(&exists)

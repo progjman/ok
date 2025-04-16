@@ -1,4 +1,4 @@
-module github.com/progjman/ok
+module oh
 
 go 1.24.0
 

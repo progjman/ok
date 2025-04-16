@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div>
+            <h1>oke oke</h1>
+            <p>Our mini service oke oke is the fastest.</p>
+            <p>Free and unlimited.</p>
+            <p>Chat with anyone in our chat. Write boldly. It's free with us.</p>
+        </div>
+
+        <div id="reg">
+            <h1>💥Регистрация💥</h1>
+            <button><b>ВХОД</b></button> | <button hx-get="/reg-name" hx-target="#reg" hx-swap="innerHTML">
+                <b>РЕГИСТРАЦИЯ</b>
+
+
+        </div>
+        <div>
+          
+            <h1>💥Объявления💥</h1>
+        </div>
+
+        <div>
+           <h1>💥Чат💥</h1>
+           
+        </div>
+        <footer>Код - это поэзия! <a href="https://wa.me/9137335181">❤️</a></footer>
+    </div>
+</body>
+
+</html>

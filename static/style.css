@@ -1,0 +1,63 @@
+
+/* 🌞 Светлая тема — по умолчанию */
+body {
+    background-color: white;
+    color: black;
+  }
+  
+  /* 🌙 Тёмная тема — если включена в системе */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+  }
+  
+  }
+
+
+
+.valid {
+    color: green;
+ 
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.invalid {
+    color: red;
+  
+    padding: 5px;
+    border-radius: 4px;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+
+.container {
+    margin: 0 auto;
+    padding: 40px; /* по умолчанию большие отступы */
+    max-width: 800px; /* ограничиваем ширину чтобы не растягивалось */
+}
+
+/* На маленьких экранах — уменьшаем отступы */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #222;
+    color: white;
+    padding: 35px;
+    text-align: left;
+}
