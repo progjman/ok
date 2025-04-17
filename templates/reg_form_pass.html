@@ -1,13 +1,16 @@
 
 <form id="reg">
     <h1>Введите ваш пароль</h1>
-    <input type="text" name="username" value="{{.Value}}" hx-get="/reg-form-pass"
+    <input type="text" name="pass" value="{{.Value}}" hx-get="check-pass"
     hx-trigger="keyup changed delay:500ms"
-    hx-target="#password-check" 
+    hx-target="#pass-check" 
     hx-params="*" 
 
     >
-    <div id="password-check">
+    <div id="pass-check">
         <!-- Здесь будет результат проверки -->
     </div>
 </form>
+
+
+       <!-- Отправка форма проверки пароля  -->

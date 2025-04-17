@@ -1,0 +1,16 @@
+
+<form id="reg">
+    <h1>Введите ваш емаил</h1>
+    <input type="text" name="email" value="{{.Value}}" hx-get="check-email"
+    hx-trigger="keyup changed delay:500ms"
+    hx-target="#email-check" 
+    hx-params="*" 
+
+    >
+    <div id="email-check">
+        <!-- Здесь будет результат проверки -->
+    </div>
+</form>
+
+
+       <!-- Отправка форма проверки email  -->

@@ -1,0 +1,15 @@
+
+<div class="{{.Status}}">
+    <p>{{.Message}}</p>
+    {{if eq .Status "valid"}}
+ 
+    <form hx-post="/next-step" hx-target="#reg" hx-swap="outerHTML">
+        <input type="hidden" name="pass" value="{{.Value}}">
+        <button hx-get="/reg-form-email" hx-target="#reg" hx-swap="innerHTML">Далее</button>
+    </form>
+    {{end}}
+</div>
+
+
+
+        <!-- Форма проверки пароля -->

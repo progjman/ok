@@ -15,3 +15,14 @@ func СheckUsernameDB(username string) bool {
 	}
 	return exists
 }
+
+func СheckEmailDB(email string) bool {
+	var exists bool
+	err := DB.QueryRow(context.Background(),
+		"SELECT EXISTS(SELECT 3 FROM email WHERE email=$3)", email).Scan(&exists)
+	if err != nil {
+		log.Println("ошибка проверки ника:", err)
+		return true
+	}
+	return exists
+}
