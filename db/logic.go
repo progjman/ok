@@ -16,13 +16,13 @@ func СheckUsernameDB(username string) bool {
 	return exists
 }
 
-func СheckEmailDB(email string) bool {
+func CheckEmailDB(email string) bool {
 	var exists bool
 	err := DB.QueryRow(context.Background(),
-		"SELECT EXISTS(SELECT 3 FROM email WHERE email=$3)", email).Scan(&exists)
+		"SELECT EXISTS(SELECT 1 FROM users WHERE email=$1)", email).Scan(&exists)
 	if err != nil {
-		log.Println("ошибка проверки ника:", err)
-		return true
+		log.Println("ошибка проверки email:", err)
+		return true // считаем, что "занят", если ошибка
 	}
 	return exists
 }

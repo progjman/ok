@@ -3,9 +3,11 @@
     <p>{{.Message}}</p>
     {{if eq .Status "valid"}}
  
-    <form hx-post="/next-step" hx-target="#reg" hx-swap="outerHTML">
-        <input type="hidden" name="username" value="{{.Value}}">
-        <button hx-get="/reg-form-pass" hx-target="#reg" hx-swap="innerHTML">Далее</button>
+    <form hx-post="/reg-form-pass" hx-target="#reg" hx-swap="outerHTML">
+
+        <input type="hidden" name="username" value="{{.Value}}">   <!-- скрытое поле -->
+
+        <button hx-post="/reg-form-pass" hx-target="#reg" hx-swap="innerHTML">Далее</button>
     </form>
     {{end}}
 </div>

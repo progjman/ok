@@ -3,7 +3,7 @@
     <p>{{.Message}}</p>
     {{if eq .Status "valid"}}
  
-    <form hx-post="/next-step" hx-target="#reg" hx-swap="outerHTML">
+    <form hx-post="" hx-target="#reg" hx-swap="outerHTML">
         <input type="hidden" name="email" value="{{.Value}}">
         <button hx-get="/check-email" hx-target="#reg" hx-swap="innerHTML">Далее</button>
     </form>

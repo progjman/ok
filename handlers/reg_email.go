@@ -20,13 +20,14 @@ func GetRegElail(w http.ResponseWriter, r *http.Request) { // Загружает
 	tmpl.Execute(w, nil) // Можно передать пустой объект, если нет данных
 }
 
-// Проверка на допустимые символы
-func isValidEmail(nick string) bool {
-	ok, _ := regexp.MatchString(`^[a-zA-Z0-9_]+$`, nick)
+// Проверка на допустимые символы для email
+func isValidEmail(email string) bool {
+	// Регулярное выражение для проверки email с символом "@"
+	ok, _ := regexp.MatchString(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`, email)
 	return ok
 }
 
-// Обработчик проверки ника
+// Обработчик проверки Email
 func CheckEmail(w http.ResponseWriter, r *http.Request) {
 	email := strings.TrimSpace(r.URL.Query().Get("email"))
 
@@ -36,18 +37,18 @@ func CheckEmail(w http.ResponseWriter, r *http.Request) {
 		Status:  "",
 	}
 
-	if len(email) > 0 {
-		if len(email) < 3 || len(email) > 20 {
-			data.Message = "From 3 to 20 characters: a-z, A-Z, 0-9, _"
+	if email != "" {
+		if len(email) > 100 {
+			data.Message = "Email слишком длинный"
 			data.Status = "invalid"
 		} else if !isValidEmail(email) {
-			data.Message = "Only Latin letters and digits are allowed"
+			data.Message = "Неверный формат email"
 			data.Status = "invalid"
-		} else if db.СheckEmailDB(email) {
-			data.Message = "This nickname is already taken"
+		} else if db.CheckEmailDB(email) {
+			data.Message = "Email уже зарегистрирован"
 			data.Status = "invalid"
 		} else {
-			data.Message = "This nickname is available"
+			data.Message = "Email подходит"
 			data.Status = "valid"
 		}
 	}

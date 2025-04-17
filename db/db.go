@@ -47,22 +47,25 @@ func InitDB() {
 	// Создаём таблицу (временно — для разработки)
 	_, err = DB.Exec(ctx, `
 	CREATE TABLE IF NOT EXISTS users (
-		id SERIAL PRIMARY KEY,
-		nickname TEXT UNIQUE NOT NULL
+		id SERIAL PRIMARY KEY,                  -- Идентификатор пользователя
+		nickname TEXT UNIQUE NOT NULL,           -- Никнейм
+		password TEXT NOT NULL,                 -- Пароль
+		email TEXT UNIQUE NOT NULL              -- Почта
 	);
 
 	CREATE TABLE IF NOT EXISTS contacts (
-		user_id INT REFERENCES users(id),
-		contact_id INT REFERENCES users(id),
-		PRIMARY KEY (user_id, contact_id)
+		user_id INT REFERENCES users(id),      -- Внешний ключ на пользователя
+		contact_id INT REFERENCES users(id),   -- Внешний ключ на контакт
+		PRIMARY KEY (user_id, contact_id)       -- Составной первичный ключ
 	);
 
 	CREATE TABLE IF NOT EXISTS ignores (
-		user_id INT REFERENCES users(id),
-		ignored_id INT REFERENCES users(id),
-		PRIMARY KEY (user_id, ignored_id)
+		user_id INT REFERENCES users(id),      -- Внешний ключ на пользователя
+		ignored_id INT REFERENCES users(id),   -- Внешний ключ на игнорируемого пользователя
+		PRIMARY KEY (user_id, ignored_id)       -- Составной первичный ключ
 	);
 	`)
+
 	if err != nil {
 		log.Fatalf("❌ Ошибка создания таблицы: %v", err)
 	} else {

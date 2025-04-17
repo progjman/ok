@@ -26,13 +26,27 @@ func GetRegFormPass(w http.ResponseWriter, r *http.Request) { // Загружа�
 	tmpl.Execute(w, nil) // Можно передать пустой объект, если нет данных
 }
 
-// Проверка на допустимые символы
-func isValidPass(pass string) bool {
-	ok, _ := regexp.MatchString(`^[a-zA-Z0-9_]+$`, pass)
-	return ok
+// Предкомпилируем регулярки один раз
+var (
+	uppercasePattern = regexp.MustCompile(`[A-Z]`)                               // хотя бы одна заглавная
+	allowedChars     = regexp.MustCompile(`^[a-zA-Z0-9!@#\$%\^&\*\(\)_\+\-=]+$`) // допустимые символы
+)
+
+// Проверка пароля на все условия
+func isValidPass(pass string) (bool, string) {
+	if len(pass) < 7 {
+		return false, "Пароль должен быть не короче 7 символов"
+	}
+	if !allowedChars.MatchString(pass) {
+		return false, "Допустимы только латиница, цифры и спецсимволы (!@#$%^&*()_+-=)"
+	}
+	if !uppercasePattern.MatchString(pass) {
+		return false, "Пароль должен содержать хотя бы одну заглавную букву"
+	}
+	return true, ""
 }
 
-// Обработчик проверки ника
+// Обработчик проверки пароля
 func CheckPass(w http.ResponseWriter, r *http.Request) {
 	pass := strings.TrimSpace(r.URL.Query().Get("pass"))
 
@@ -42,15 +56,12 @@ func CheckPass(w http.ResponseWriter, r *http.Request) {
 		Status:  "",
 	}
 
-	if len(pass) > 0 {
-		if len(pass) < 3 || len(pass) > 20 {
-			data.Message = "From 3 to 20 characters: a-z, A-Z, 0-9, _"
-			data.Status = "invalid"
-		} else if !isValidPass(pass) {
-			data.Message = "Only Latin letters and digits are allowed"
+	if pass != "" {
+		if ok, msg := isValidPass(pass); !ok {
+			data.Message = msg
 			data.Status = "invalid"
 		} else {
-			data.Message = "This password is available"
+			data.Message = "Пароль подходит"
 			data.Status = "valid"
 		}
 	}
