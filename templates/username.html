@@ -1,0 +1,17 @@
+<div id="reg">
+    <h1>
+        <span class="boom">💥</span> Напишите ник <span class="boom">💥</span>
+    </h1>
+    <form>
+        <label for="username"></label>
+        <input 
+            type="text" 
+            name="username" 
+            id="username"
+            hx-post="/check-username"
+            hx-trigger="keyup changed delay:300ms"
+            hx-target="#reg"
+            hx-swap="outerHTML"
+        />
+    </form>
+</div>

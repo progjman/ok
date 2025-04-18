@@ -48,7 +48,7 @@ func InitDB() {
 	_, err = DB.Exec(ctx, `
 	CREATE TABLE IF NOT EXISTS users (
 		id SERIAL PRIMARY KEY,                  -- Идентификатор пользователя
-		nickname TEXT UNIQUE NOT NULL,           -- Никнейм
+		username TEXT UNIQUE NOT NULL,           -- Никнейм
 		password TEXT NOT NULL,                 -- Пароль
 		email TEXT UNIQUE NOT NULL              -- Почта
 	);

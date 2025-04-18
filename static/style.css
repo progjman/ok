@@ -1,48 +1,23 @@
 html, body {
+  height: 100vh; /* ← обязательно */
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 /* 🌞 Светлая тема */
 body {
-  background-color: white;
-  color: black;
+  background-color: rgb(250, 250, 250);
+  color: rgb(66, 66, 66);
 }
 
 /* 🌙 Тёмная тема */
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #303030;
+    color: #ffffff;
   }
 }
 
-.container {
-  display: grid;
-  grid-template-rows: repeat(4, 1fr) auto;
-  height: 100vh;
-}
-
-/* контентные блоки */
-.section {
-  
-  padding: 10px;
-  text-align: left;
-  box-sizing: border-box;
-  padding-left: 5%;
-}
-
-/* ФУТЕР — часть сетки, 5-ая строка */
-footer {
-  background: #222;
-  color: white;
-  padding: 30px;
-  text-align: left;
-  grid-row: 5;
-}
-
-/* Остальные стили */
 a {
   text-decoration: none;
 }
@@ -57,4 +32,25 @@ a {
   color: red;
   padding: 5px;
   border-radius: 4px;
+}
+
+/* Остальные стили */
+
+.container {
+  display: grid;
+  height: 100vh; /* 100% от высоты окна */
+  grid-template-rows: 15vh 25vh 25vh 25vh auto; /* 4 блока + футер */
+}
+
+/* Блоки контента */
+.reg, .about, .ad, .chat {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Футер всегда внизу */
+footer {
+  background: #222;
+  color: white;
+  padding: 20px;
 }

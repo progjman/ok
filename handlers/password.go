@@ -9,21 +9,22 @@ import (
 	// тут должен быть твой модуль для работы с базой
 )
 
-// // Структура для данных, передаваемых в шаблон
-// type FormData struct {
-// 	Value   string // введённый ник
-// 	Message string // сообщение пользователю
-// 	Status  string // valid | invalid
-// }
+func GetRegFormPass(w http.ResponseWriter, r *http.Request) {
+	username := r.FormValue("username")
 
-func GetRegFormPass(w http.ResponseWriter, r *http.Request) { // Загружает поле ввода
-	tmpl, err := template.ParseFiles("templates/reg_form_pass.html")
+	data := FormData{
+		Username: username,
+		Message:  "Придумайте пароль",
+	}
+
+	tmpl, err := template.ParseFiles("templates/password.html")
 	if err != nil {
 		http.Error(w, "Ошибка шаблона", http.StatusInternalServerError)
-		log.Println("Ошибка шаблона:", err)
+		log.Println(err)
 		return
 	}
-	tmpl.Execute(w, nil) // Можно передать пустой объект, если нет данных
+
+	tmpl.Execute(w, data)
 }
 
 // Предкомпилируем регулярки один раз
@@ -48,16 +49,19 @@ func isValidPass(pass string) (bool, string) {
 
 // Обработчик проверки пароля
 func CheckPass(w http.ResponseWriter, r *http.Request) {
-	pass := strings.TrimSpace(r.URL.Query().Get("pass"))
+	// Получаем пароль и ник из POST-формы
+	username := strings.TrimSpace(r.FormValue("username"))
+	password := strings.TrimSpace(r.FormValue("password"))
 
 	data := FormData{
-		Value:   pass,
-		Message: "",
-		Status:  "",
+		Username: username, // чтобы не потерять ник
+		Value:    password,
+		Message:  "",
+		Status:   "",
 	}
 
-	if pass != "" {
-		if ok, msg := isValidPass(pass); !ok {
+	if password != "" {
+		if ok, msg := isValidPass(password); !ok {
 			data.Message = msg
 			data.Status = "invalid"
 		} else {
@@ -66,7 +70,7 @@ func CheckPass(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	tmpl, err := template.ParseFiles("templates/reg_pass.html")
+	tmpl, err := template.ParseFiles("templates/check-password.html")
 	if err != nil {
 		http.Error(w, "Ошибка шаблона", http.StatusInternalServerError)
 		log.Println("Ошибка шаблона:", err)

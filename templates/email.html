@@ -1,0 +1,17 @@
+<div id="reg">
+    <h1>
+        <span class="boom">💥</span> Напишите email <span class="boom">💥</span>
+    </h1>
+    <form>
+        <label for="email"></label>
+        <input 
+            type="text" 
+            name="email" 
+            id="email"
+            hx-post="/check-email"
+            hx-trigger="keyup changed delay:300ms"
+            hx-target="#reg"
+            hx-swap="outerHTML"
+        />
+    </form>
+</div>

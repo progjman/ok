@@ -1,0 +1,36 @@
+<div id="reg">
+    <h1>
+        <span class="boom">💥</span> Напишите email <span class="boom">💥</span>
+    </h1>
+    <div id="check-email">
+        
+        <label for="email"></label>
+        <input 
+        type="text" 
+        name="email" 
+        id="email" 
+        value="{{.Value}}" 
+        class="input {{.Status}}"
+        hx-post="/check-email"
+        hx-trigger="keyup changed delay:300ms"
+        hx-target="#reg"
+        hx-swap="outerHTML"
+    />
+    
+    <!-- status -->
+    <div class="status {{.Status}}">{{.Message}}</div>
+    
+    {{if eq .Status "valid"}}
+    <form 
+        hx-post="/save-user" 
+        hx-target="#reg" 
+        hx-swap="outerHTML"
+    >
+        <input type="text" name="username" value="{{.Username}}">
+        <input type="text" name="password" value="{{.Password}}">
+        <input type="text" name="email" value="{{.Value}}">
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    {{end}}
+    </div>
+</div>

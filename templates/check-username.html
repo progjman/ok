@@ -1,0 +1,34 @@
+<div id="reg">
+    <h1>
+        <span class="boom">💥</span> Напишите ник <span class="boom">💥</span>
+    </h1>
+    <div id="check-username">
+        
+        <label for="username"></label>
+        <input 
+            type="text" 
+            name="username" 
+            id="username" 
+            value="{{.Value}}" 
+            class="input {{.Status}}"
+            hx-post="/check-username"
+            hx-trigger="keyup changed delay:300ms"
+            hx-target="#reg"
+            hx-swap="outerHTML"
+        />
+        <div class="status {{.Status}}">{{.Message}}</div>
+
+        {{if eq .Status "valid"}}
+
+        <!-- hidden меняем на текст для теста -->
+            <input type="text" name="username" value="{{.Value}}">   
+            <button 
+                hx-post="/password" 
+                hx-vals='{"username": "{{.Value}}"}' 
+                hx-target="#reg" 
+                hx-swap="outerHTML">
+                Далее
+            </button>
+        {{end}}
+    </div>
+</div>

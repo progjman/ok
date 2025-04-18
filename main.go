@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
-	"oh/db"
-	"oh/handlers"
+	"ok/db"
+	"ok/handlers"
 )
 
 func main() {
@@ -14,15 +14,18 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	http.HandleFunc("/", handlers.IndexHandler)
+
+	http.HandleFunc("/username", handlers.GetRegForm)
+
 	http.HandleFunc("/check-username", handlers.CheckUsername)
 
-	http.HandleFunc("/reg-name", handlers.GetRegForm)
+	http.HandleFunc("/password", handlers.GetRegFormPass)
+	http.HandleFunc("/check-password", handlers.CheckPass)
 
-	http.HandleFunc("/reg-form-pass", handlers.GetRegFormPass)
-	http.HandleFunc("/check-pass", handlers.CheckPass)
-
-	http.HandleFunc("/reg-form-email", handlers.GetRegElail)
+	http.HandleFunc("/email", handlers.GetRegEmail)
 	http.HandleFunc("/check-email", handlers.CheckEmail)
+
+	http.HandleFunc("/save-user", handlers.SaveUser)
 
 	log.Println("✅ Сервер шуршит!")
 	http.ListenAndServe(":8080", nil)
